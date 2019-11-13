@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kakao 지도 시작하기</title>
+<script>
+	var myArray = {
+		4 : "#eb3434",
+		3 : "#ebdc34",
+		2 : "#6eeb34",
+		1 : "#34baeb"
+	};
+</script>
+
+<style>
+#page {
+	width: 960px;
+	height: 960px;
+}
+
+#map {
+	width: 800px;
+	height: 1000px;
+	border: solid 1px red;
+}
+
+@media screen and (max-width: 800px) and (max-height: 1000px) {
+	#page {
+		width: 100%;
+	}
+	#map {
+		width: 100%;
+		height: 90%;
+		border: solid 1px blue;
+	}
+}
+</style>
+
+</head>
+<body>
+	<div id="page">
+		<div id="map"></div>
+	</div>
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47f763e07816b16e574fcc7c97cf1028"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center : new kakao.maps.LatLng(37.425779, 126.764630),
+			level : 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+
+		var realL = 0.01;
+		var radian = 0.523599;
+		var latitude = 37.5642135;
+		var longitude = 127.0016985;
+
+		for (var i = 0; i < 10; i++) {
+			latitude += 2 * realL * Math.cos(radian);
+			longitude = 127.0016985;
+			for (var j = 0; j < 10; j++) {
+				longitude += 3 * realL;
+				var a1 = latitude + realL * Math.cos(radian);
+				var a2 = longitude + realL * Math.sin(radian);
+				var b1 = latitude + realL * Math.cos(radian);
+				var b2 = longitude - realL * Math.sin(radian);
+				var c1 = latitude;
+				var c2 = longitude - realL;
+				var d1 = latitude - realL * Math.cos(radian);
+				var d2 = longitude - realL * Math.sin(radian);
+				var e1 = latitude - realL * Math.cos(radian);
+				var e2 = longitude + realL * Math.sin(radian);
+				var f1 = latitude;
+				var f2 = longitude + realL;
+
+				var polygonPath = [ new kakao.maps.LatLng(a1, a2),
+						new kakao.maps.LatLng(b1, b2),
+						new kakao.maps.LatLng(c1, c2),
+						new kakao.maps.LatLng(d1, d2),
+						new kakao.maps.LatLng(e1, e2),
+						new kakao.maps.LatLng(f1, f2), ];
+
+				var polygon = new kakao.maps.Polygon({
+					path : polygonPath, // 그려질 다각형의 좌표 배열입니다
+					strokeWeight : 3, // 선의 두께입니다
+					strokeColor : '#FFDC3C', // 선의 색깔입니다
+					strokeOpacity : 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+					strokeStyle : 'longdash', // 선의 스타일입니다
+					fillColor : '#FFFF96', // 채우기 색깔입니다
+					fillOpacity : 0.7
+				// 채우기 불투명도 입니다
+				});
+
+				polygon.setMap(map);
+
+				var a1 = latitude + realL * Math.cos(radian) + realL
+						* Math.cos(radian);
+				var a2 = longitude + realL * Math.sin(radian) + (3 / 2) * realL;
+				var b1 = latitude + realL * Math.cos(radian) + realL
+						* Math.cos(radian);
+				var b2 = longitude - realL * Math.sin(radian) + (3 / 2) * realL;
+				var c1 = latitude + realL * Math.cos(radian);
+				var c2 = longitude - realL + (3 / 2) * realL;
+				var d1 = latitude - realL * Math.cos(radian) + realL
+						* Math.cos(radian);
+				var d2 = longitude - realL * Math.sin(radian) + (3 / 2) * realL;
+				var e1 = latitude - realL * Math.cos(radian) + realL
+						* Math.cos(radian);
+				var e2 = longitude + realL * Math.sin(radian) + (3 / 2) * realL;
+				var f1 = latitude + realL * Math.cos(radian);
+				var f2 = longitude + realL + (3 / 2) * realL;
+
+				var polygonPath = [ new kakao.maps.LatLng(a1, a2),
+						new kakao.maps.LatLng(b1, b2),
+						new kakao.maps.LatLng(c1, c2),
+						new kakao.maps.LatLng(d1, d2),
+						new kakao.maps.LatLng(e1, e2),
+						new kakao.maps.LatLng(f1, f2), ];
+
+				var polygon = new kakao.maps.Polygon({
+					path : polygonPath, // 그려질 다각형의 좌표 배열입니다
+					strokeWeight : 3, // 선의 두께입니다
+					strokeColor : '#FFDC3C', // 선의 색깔입니다
+					strokeOpacity : 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+					strokeStyle : 'longdash', // 선의 스타일입니다
+					fillColor : '#FFFF96', // 채우기 색깔입니다
+					fillOpacity : 0.7
+				// 채우기 불투명도 입니다
+				});
+
+				polygon.setMap(map);
+			}
+
+		}
+
+	</script>
+</body>
+</html>
